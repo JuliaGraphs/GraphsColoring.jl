@@ -1,14 +1,45 @@
 name = "GraphColoring"
-uuid = "2eaf82eb-f9ae-4d9b-a5af-4a8051fbc35e"
-authors = ["djukic14 <danijel.jukic14@gmail.com> and contributors"]
-version = "1.0.0-DEV"
+uuid = "ed38bb8a-6120-4024-8d1e-8789784f251b"
+authors = ["Danijel Jukić <danijel.jukic14@gmail.com> and contributors"]
+version = "0.1.0"
+
+[deps]
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+
+[weakdeps]
+BEAST = "bb4162c7-ba94-5a20-af32-d8ec4428bdd1"
+Graphs = "86223c79-3864-5bf0-83f7-82e725a168b6"
+
+[extensions]
+GraphColoringBEAST = ["BEAST"]
+GraphColoringGraphs = ["Graphs"]
 
 [compat]
-julia = "1.6.7"
+julia = "1.10"
+LinearAlgebra = "1"
+BEAST = "2"
+CompScienceMeshes = "0.9"
+DataStructures = ">=0.18.1"
+Graphs = "1"
+Aqua = "0.8"
+SparseArrays = "1"
+Test = "1"
+JuliaFormatter = "2.1"
+TestItemRunner = "1.1"
+TestItems = "1.0"
 
 [extras]
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
+BEAST = "bb4162c7-ba94-5a20-af32-d8ec4428bdd1"
+CompScienceMeshes = "3e66a162-7b8c-5da0-b8f8-124ecd2c3ae1"
+Graphs = "86223c79-3864-5bf0-83f7-82e725a168b6"
+JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+TestItemRunner = "f8b46487-2199-4994-9208-9a1283c18c0a"
+TestItems = "1c621080-faea-4a02-84b6-bbd5e436b8fe"
 
 [targets]
-test = ["Aqua", "Test"]
+test = ["Aqua", "BEAST", "CompScienceMeshes", "Graphs", "JuliaFormatter", "LinearAlgebra", "SparseArrays", "Test", "TestItemRunner", "TestItems"]
