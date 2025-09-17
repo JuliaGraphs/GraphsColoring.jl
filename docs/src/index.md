@@ -17,7 +17,7 @@ Currently, the following aspects are implemented (✓) and planned (⌛):
 
 The [GraphColoring](https://github.com/djukic14/GraphColoring.jl) package is related to the following packages:
 
-- [BEAST](https://github.com/krcools/BEAST.jl)
+- [`BEAST`](https://github.com/krcools/BEAST.jl)
 - [`Graphs.jl`](https://github.com/JuliaGraphs/Graphs.jl)
 
 ## Documentation

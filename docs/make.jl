@@ -1,5 +1,5 @@
 using GraphColoring
-using Graphs, BEAST, PlotlyJS
+using Graphs, PlotlyJS
 using Documenter
 
 import GraphColoring:
@@ -19,11 +19,6 @@ DocMeta.setdocmeta!(GraphColoring, :DocTestSetup, :(using GraphColoring); recurs
 makedocs(;
     modules=[
         GraphColoring,
-        if isdefined(Base, :get_extension)
-            Base.get_extension(GraphColoring, :GraphColoringBEAST)
-        else
-            GraphColoring.GraphColoringBEAST
-        end,
         if isdefined(Base, :get_extension)
             Base.get_extension(GraphColoring, :GraphColoringGraphs)
         else

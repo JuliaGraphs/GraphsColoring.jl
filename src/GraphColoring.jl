@@ -39,10 +39,10 @@ function color(conflicts; algorithm=Workstream(DSATUR()))
 end
 
 export color, WorkstreamDSATUR, WorkstreamGreedy, Workstream, DSATUR, Greedy
+export PassThroughConflictFunctor
 
 if !isdefined(Base, :get_extension)
     include("../ext/GraphColoringGraphs.jl")
-    include("../ext/GraphColoringBEAST.jl")
 end
 
 end # module GraphColoring

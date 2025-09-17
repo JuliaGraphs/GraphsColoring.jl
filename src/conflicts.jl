@@ -157,3 +157,29 @@ representation.
 function noconflicts(s::SparseMatrixCSC)
     return iszero(nnz(s))
 end
+
+"""
+    struct PassThroughConflictFunctor{E,C1,C2}
+
+A functor that passes through elements, conflicts, and conflict IDs for the `conflicts` function.
+
+# Fields
+
+  - `elements::E`: The elements to be passed through.
+  - `conflicts::C1`: The conflicts to be passed through.
+  - `conflictids::C2`: The conflict IDs to be passed through.
+"""
+struct PassThroughConflictFunctor{E,C1,C2}
+    elements::E
+    conflicts::C1
+    conflictids::C2
+end
+
+"""
+    conflicts(f::PassThroughConflictFunctor; kwargs...)
+
+Returns the elements, conflicts, and conflict IDs of the functor.
+"""
+function conflicts(f::PassThroughConflictFunctor; kwargs...)
+    return f.elements, f.conflicts, f.conflictids
+end

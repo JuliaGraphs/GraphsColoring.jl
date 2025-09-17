@@ -1,28 +1,23 @@
 using CompScienceMeshes
-using BEAST
-using Test
+using Test, JLD2
 using GraphColoring
 using SparseArrays
 using Graphs
 
+conflictexamples = load(
+    joinpath(pkgdir(GraphColoring), "test", "assets", "conflictexamples.jld2")
+)["conflictsdict"]
 @testset "Workstream" begin
-    ms = [
-        meshrectangle(1.0, 1.0, 0.1),
-        meshcuboid(1.0, 1.0, 1.0, 0.1),
-        # CompScienceMeshes.readmesh(
-        #     joinpath(pkgdir(GraphColoring), "test", "assets", "in", "sphere.in")
-        # ),
-        # CompScienceMeshes.readmesh(
-        #     joinpath(pkgdir(GraphColoring), "test", "assets", "in", "multiplerects.in")
-        # ),
-        # CompScienceMeshes.readmesh(
-        #     joinpath(pkgdir(GraphColoring), "test", "assets", "in", "twospheres.in")
-        # ),
-    ]
+    ms = ["rectangle", "cuboid"]
+    Xs = ["rt", "lagrangecxd0", "lagrangec0d1", "bc"]
 
     for m in ms
-        for X in [raviartthomas(m), lagrangecxd0(m), lagrangec0d1(m), buffachristiansen(m)]
-            for s in [GraphColoring.conflictmatrix(X), GraphColoring.conflictgraph(X)]
+        for X in Xs
+            elements, conflictindices, conflictids = conflictexamples[(m, X)]
+            conflicts = GraphColoring.ConflictFunctor(conflictindices)
+            c = GraphColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
+
+            for s in [GraphColoring.conflictmatrix(c), GraphColoring.conflictgraph(c)]
                 @test GraphColoring.color(s) == GraphColoring.color(s, WorkstreamDSATUR)
 
                 for algorithm in [WorkstreamDSATUR, WorkstreamGreedy]
@@ -31,7 +26,6 @@ using Graphs
                     colors = GraphColoring.color(s, algorithm)
 
                     @test sort(vcat(colors...)) == 1:GraphColoring._numelements(s)
-                    # s = s - I
                     for color in eachindex(colors)
                         elements = colors[color]
                         for testelement in elements

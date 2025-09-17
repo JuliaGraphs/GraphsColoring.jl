@@ -24,7 +24,20 @@ A SimpleGraph representing the conflict graph.
 This function works by first computing the conflict matrix using the `conflictmatrix` function, and then creating a SimpleGraph from the matrix.
 """
 function conflictgraph(X; kwargs...)
-    return SimpleGraph(conflictmatrix(X; kwargs...))
+    elements, conflicts, conflictids = GraphColoring.conflicts(X; kwargs...)
+    reverseconflicts = GraphColoring.reverseconflicts(elements, conflicts, conflictids)
+
+    graph = SimpleGraph(length(elements))
+
+    for elements in reverseconflicts
+        for element in elements
+            for element2 in elements
+                element == element2 && continue
+                add_edge!(graph, element, element2)
+            end
+        end
+    end
+    return graph
 end
 
 """
@@ -80,4 +93,4 @@ function noconflicts(g::AbstractGraph)
     return iszero(ne(g))
 end
 
-end # module GraphColoringBEAST
+end # module GraphColoringGraphs
