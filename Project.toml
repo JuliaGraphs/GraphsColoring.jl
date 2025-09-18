@@ -16,9 +16,9 @@ GraphColoringGraphs = ["Graphs"]
 [compat]
 Aqua = "0.8"
 CompScienceMeshes = "0.9"
-DataStructures = ">=0.18.1"
+DataStructures = "^0.18.1"
 Graphs = "1"
-JLD2 = ">=0.4"
+JLD2 = "^0.4"
 JuliaFormatter = "2.1"
 LinearAlgebra = "1"
 SparseArrays = "1"
