@@ -14,6 +14,32 @@ import GraphColoring:
     conflicts,
     ConflictFunctor
 
+# this will be moved to BEAST as soon as the pull request is ready
+using BEAST
+function GraphColoring.conflicts(
+    space::BEAST.Space;
+    addata=BEAST.assemblydata(space),
+    refspace=BEAST.refspace(space),
+    kwargs...,
+)
+    elements, ad, _ = addata
+
+    conflictindices = Vector{Int}[Int[] for _ in eachindex(elements)]
+
+    reference = BEAST.domain(BEAST.chart(geometry(space), first(geometry(space))))
+
+    for elementid in eachindex(elements)
+        for i in 1:numfunctions(refspace, reference)
+            for (functionid, _) in ad[elementid, i]
+                push!(conflictindices[elementid], functionid)
+            end
+        end
+    end
+    return eachindex(elements),
+    GraphColoring.ConflictFunctor(conflictindices),
+    Base.OneTo(numfunctions(space))
+end
+
 DocMeta.setdocmeta!(GraphColoring, :DocTestSetup, :(using GraphColoring); recursive=true)
 
 makedocs(;
