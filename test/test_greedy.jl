@@ -1,4 +1,3 @@
-using CompScienceMeshes
 using Test, JLD2
 using GraphColoring
 using SparseArrays
