@@ -4,11 +4,11 @@
 ```
 
 ```@autodocs
-Modules=[GraphColoring,
+Modules=[GraphsColoring,
         if isdefined(Base, :get_extension)
-            Base.get_extension(GraphColoring, :GraphColoringGraphs)
+            Base.get_extension(GraphsColoring, :GraphsColoringGraphs)
         else
-            GraphColoring.GraphColoringGraphs
+            GraphsColoring.GraphsColoringGraphs
         end,
         ]
 ```

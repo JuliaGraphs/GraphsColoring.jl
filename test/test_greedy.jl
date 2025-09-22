@@ -1,13 +1,13 @@
 using Test, JLD2
-using GraphColoring
+using GraphsColoring
 using SparseArrays
 using Graphs
 
 conflictexamples = load(
-    joinpath(pkgdir(GraphColoring), "test", "assets", "conflictexamples.jld2")
+    joinpath(pkgdir(GraphsColoring), "test", "assets", "conflictexamples.jld2")
 )["conflictsdict"]
 @testset "Greedy Coloring" begin
-    algorithm = GraphColoring.Greedy()
+    algorithm = GraphsColoring.Greedy()
 
     ms = ["rectangle", "cuboid", "twospheres"]
     Xs = ["rt", "lagrangecxd0", "lagrangec0d1", "bc"]
@@ -15,16 +15,16 @@ conflictexamples = load(
     for m in ms
         for X in Xs
             elements, conflictindices, conflictids = conflictexamples[(m, X)]
-            conflicts = GraphColoring.ConflictFunctor(conflictindices)
-            c = GraphColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
+            conflicts = GraphsColoring.ConflictFunctor(conflictindices)
+            c = GraphsColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
 
-            for s in [GraphColoring.conflictmatrix(c), GraphColoring.conflictgraph(c)]
-                @test GraphColoring.color(s; algorithm=GraphColoring.Greedy()) ==
-                    GraphColoring.color(s, GraphColoring.Greedy())
+            for s in [GraphsColoring.conflictmatrix(c), GraphsColoring.conflictgraph(c)]
+                @test GraphsColoring.color(s; algorithm=GraphsColoring.Greedy()) ==
+                    GraphsColoring.color(s, GraphsColoring.Greedy())
 
                 println("coloring with $(typeof(algorithm))")
 
-                colors = GraphColoring.color(s, algorithm)
+                colors = GraphsColoring.color(s, algorithm)
 
                 println("We have $(length(colors)) colors")
 
@@ -40,7 +40,7 @@ conflictexamples = load(
                     for testelement in elements
                         for trialelement in elements
                             testelement == trialelement && continue
-                            @test testelement ∉ GraphColoring._neighbors(s, trialelement)
+                            @test testelement ∉ GraphsColoring._neighbors(s, trialelement)
                         end
                     end
                 end

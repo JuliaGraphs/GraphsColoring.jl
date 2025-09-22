@@ -1,8 +1,8 @@
-module GraphColoringGraphs
-using GraphColoring
+module GraphsColoringGraphs
+using GraphsColoring
 using Graphs
 
-import GraphColoring: conflictgraph, conflictmatrix, _neighbors, _numelements, noconflicts
+import GraphsColoring: conflictgraph, conflictmatrix, _neighbors, _numelements, noconflicts
 
 # creates conflict graph as SimpleGraph from Graphs.jl (https://github.com/JuliaGraphs/Graphs.jl)
 # from conflictmatrix
@@ -24,8 +24,8 @@ A SimpleGraph representing the conflict graph.
 This function works by first computing the conflict matrix using the `conflictmatrix` function, and then creating a SimpleGraph from the matrix.
 """
 function conflictgraph(X; kwargs...)
-    elements, conflicts, conflictids = GraphColoring.conflicts(X; kwargs...)
-    reverseconflicts = GraphColoring.reverseconflicts(elements, conflicts, conflictids)
+    elements, conflicts, conflictids = GraphsColoring.conflicts(X; kwargs...)
+    reverseconflicts = GraphsColoring.reverseconflicts(elements, conflicts, conflictids)
 
     graph = SimpleGraph(length(elements))
 
@@ -93,4 +93,4 @@ function noconflicts(g::AbstractGraph)
     return iszero(ne(g))
 end
 
-end # module GraphColoringGraphs
+end # module GraphsColoringGraphs

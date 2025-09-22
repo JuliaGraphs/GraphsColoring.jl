@@ -85,8 +85,8 @@ represents a conflict between elements `i` and `j`.
 Note that this matrix is symmetric.
 """
 function conflictmatrix(X; kwargs...)
-    elements, conflicts, conflictids = GraphColoring.conflicts(X; kwargs...)
-    reverseconflicts = GraphColoring.reverseconflicts(elements, conflicts, conflictids)
+    elements, conflicts, conflictids = GraphsColoring.conflicts(X; kwargs...)
+    reverseconflicts = GraphsColoring.reverseconflicts(elements, conflicts, conflictids)
 
     I = Int[]
     J = Int[]

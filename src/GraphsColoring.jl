@@ -1,4 +1,4 @@
-module GraphColoring
+module GraphsColoring
 using SparseArrays
 using DataStructures
 
@@ -7,7 +7,7 @@ using DataStructures
 """
 function conflicts end
 
-# requires Graphs.jl to load extension GraphColoringGraphs.jl
+# requires Graphs.jl to load extension GraphsColoringGraphs.jl
 """
     conflictgraph
 """
@@ -42,7 +42,7 @@ export color, WorkstreamDSATUR, WorkstreamGreedy, Workstream, DSATUR, Greedy
 export PassThroughConflictFunctor
 
 if !isdefined(Base, :get_extension)
-    include("../ext/GraphColoringGraphs.jl")
+    include("../ext/GraphsColoringGraphs.jl")
 end
 
-end # module GraphColoring
+end # module GraphsColoring

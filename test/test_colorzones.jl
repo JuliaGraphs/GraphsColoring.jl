@@ -1,10 +1,10 @@
 using Test, JLD2
-using GraphColoring
+using GraphsColoring
 using SparseArrays
 using Graphs
 
 conflictexamples = load(
-    joinpath(pkgdir(GraphColoring), "test", "assets", "conflictexamples.jld2")
+    joinpath(pkgdir(GraphsColoring), "test", "assets", "conflictexamples.jld2")
 )["conflictsdict"]
 @testset "Color zones" begin
     ms = ["rectangle", "cuboid", "sphere", "multiplerects", "twospheres"]
@@ -13,16 +13,16 @@ conflictexamples = load(
     for m in ms
         for X in Xs
             elements, conflictindices, conflictids = conflictexamples[(m, X)]
-            conflicts = GraphColoring.ConflictFunctor(conflictindices)
-            c = GraphColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
-            for s in [GraphColoring.conflictmatrix(c), GraphColoring.conflictgraph(c)]
-                oddzones, evenzones = GraphColoring.partition(s)
+            conflicts = GraphsColoring.ConflictFunctor(conflictindices)
+            c = GraphsColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
+            for s in [GraphsColoring.conflictmatrix(c), GraphsColoring.conflictgraph(c)]
+                oddzones, evenzones = GraphsColoring.partition(s)
 
-                for algorithm in [GraphColoring.DSATUR(), GraphColoring.Greedy()]
+                for algorithm in [GraphsColoring.DSATUR(), GraphsColoring.Greedy()]
                     println("coloring with $(typeof(algorithm))")
 
-                    oddzonecolors = GraphColoring.colorzones(s, oddzones, algorithm)
-                    evenzonecolors = GraphColoring.colorzones(s, evenzones, algorithm)
+                    oddzonecolors = GraphsColoring.colorzones(s, oddzones, algorithm)
+                    evenzonecolors = GraphsColoring.colorzones(s, evenzones, algorithm)
 
                     for i in eachindex(oddzones)
                         @test sort(vcat(oddzonecolors[i]...)) == sort(collect(oddzones[i]))
@@ -40,7 +40,7 @@ conflictexamples = load(
                                     for trialelement in elements
                                         testelement == trialelement && continue
                                         @test testelement ∉
-                                            GraphColoring._neighbors(s, trialelement)
+                                            GraphsColoring._neighbors(s, trialelement)
                                     end
                                 end
                             end

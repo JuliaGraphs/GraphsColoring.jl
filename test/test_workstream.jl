@@ -1,10 +1,10 @@
 using Test, JLD2
-using GraphColoring
+using GraphsColoring
 using SparseArrays
 using Graphs
 
 conflictexamples = load(
-    joinpath(pkgdir(GraphColoring), "test", "assets", "conflictexamples.jld2")
+    joinpath(pkgdir(GraphsColoring), "test", "assets", "conflictexamples.jld2")
 )["conflictsdict"]
 @testset "Workstream" begin
     ms = ["rectangle", "cuboid"]
@@ -13,25 +13,25 @@ conflictexamples = load(
     for m in ms
         for X in Xs
             elements, conflictindices, conflictids = conflictexamples[(m, X)]
-            conflicts = GraphColoring.ConflictFunctor(conflictindices)
-            c = GraphColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
+            conflicts = GraphsColoring.ConflictFunctor(conflictindices)
+            c = GraphsColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
 
-            for s in [GraphColoring.conflictmatrix(c), GraphColoring.conflictgraph(c)]
-                @test GraphColoring.color(s) == GraphColoring.color(s, WorkstreamDSATUR)
+            for s in [GraphsColoring.conflictmatrix(c), GraphsColoring.conflictgraph(c)]
+                @test GraphsColoring.color(s) == GraphsColoring.color(s, WorkstreamDSATUR)
 
                 for algorithm in [WorkstreamDSATUR, WorkstreamGreedy]
                     println("coloring with $(typeof(algorithm))")
 
-                    colors = GraphColoring.color(s, algorithm)
+                    colors = GraphsColoring.color(s, algorithm)
 
-                    @test sort(vcat(colors...)) == 1:GraphColoring._numelements(s)
+                    @test sort(vcat(colors...)) == 1:GraphsColoring._numelements(s)
                     for color in eachindex(colors)
                         elements = colors[color]
                         for testelement in elements
                             for trialelement in elements
                                 testelement == trialelement && continue
                                 @test testelement ∉
-                                    GraphColoring._neighbors(s, trialelement)
+                                    GraphsColoring._neighbors(s, trialelement)
                             end
                         end
                     end

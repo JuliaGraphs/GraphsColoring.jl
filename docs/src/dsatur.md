@@ -21,14 +21,14 @@ The colors are not guaranteed to be balanced.
 using PlotlyJS
 using CompScienceMeshes
 using BEAST
-using GraphColoring
+using GraphsColoring
 
 m = meshsphere(1.0, 0.1)
 X = raviartthomas(m)
 
-conflicts = GraphColoring.conflictmatrix(X)
+conflicts = GraphsColoring.conflictmatrix(X)
 
-colors = GraphColoring.color(conflicts; algorithm=DSATUR())
+colors = GraphsColoring.color(conflicts; algorithm=DSATUR())
 
 for (i, color) in enumerate(colors)
     println("Color $i has $(length(color)) elements")

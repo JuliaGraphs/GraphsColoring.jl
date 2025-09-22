@@ -71,6 +71,6 @@ jobs:
         shell: julia --project=docs --color=yes {0}
         run: |
           using Documenter: DocMeta, doctest
-          using GraphColoring
-          DocMeta.setdocmeta!(GraphColoring, :DocTestSetup, :(using GraphColoring); recursive=true)
-          doctest(GraphColoring)
+          using GraphsColoring
+          DocMeta.setdocmeta!(GraphsColoring, :DocTestSetup, :(using GraphsColoring); recursive=true)
+          doctest(GraphsColoring)

@@ -1,8 +1,8 @@
-using GraphColoring
+using GraphsColoring
 using Graphs, PlotlyJS
 using Documenter
 
-import GraphColoring:
+import GraphsColoring:
     node,
     partition,
     gather,
@@ -16,7 +16,7 @@ import GraphColoring:
 
 # this will be moved to BEAST as soon as the pull request is ready
 using BEAST
-function GraphColoring.conflicts(
+function GraphsColoring.conflicts(
     space::BEAST.Space;
     addata=BEAST.assemblydata(space),
     refspace=BEAST.refspace(space),
@@ -36,26 +36,26 @@ function GraphColoring.conflicts(
         end
     end
     return eachindex(elements),
-    GraphColoring.ConflictFunctor(conflictindices),
+    GraphsColoring.ConflictFunctor(conflictindices),
     Base.OneTo(numfunctions(space))
 end
 
-DocMeta.setdocmeta!(GraphColoring, :DocTestSetup, :(using GraphColoring); recursive=true)
+DocMeta.setdocmeta!(GraphsColoring, :DocTestSetup, :(using GraphsColoring); recursive=true)
 
 makedocs(;
     modules=[
-        GraphColoring,
+        GraphsColoring,
         if isdefined(Base, :get_extension)
-            Base.get_extension(GraphColoring, :GraphColoringGraphs)
+            Base.get_extension(GraphsColoring, :GraphsColoringGraphs)
         else
-            GraphColoring.GraphColoringGraphs
+            GraphsColoring.GraphsColoringGraphs
         end,
     ],
     authors="Danijel Jukić <danijel.jukic14@gmail.com> and contributors",
-    sitename="GraphColoring.jl",
+    sitename="GraphsColoring.jl",
     format=Documenter.HTML(;
         prettyurls=true,
-        canonical="https://djukic14.github.io/GraphColoring.jl",
+        canonical="https://djukic14.github.io/GraphsColoring.jl",
         edit_link="main",
         assets=String[],
     ),
@@ -73,7 +73,7 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/djukic14/GraphColoring.jl",
+    repo="github.com/djukic14/GraphsColoring.jl",
     target="build",
     devbranch="main",
     push_preview=true,

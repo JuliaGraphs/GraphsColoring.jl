@@ -1,10 +1,10 @@
 using Test, JLD2
-using GraphColoring
+using GraphsColoring
 using SparseArrays
 using Graphs
 
 conflictexamples = load(
-    joinpath(pkgdir(GraphColoring), "test", "assets", "conflictexamples.jld2")
+    joinpath(pkgdir(GraphsColoring), "test", "assets", "conflictexamples.jld2")
 )["conflictsdict"]
 @testset "Partitioning" begin
     ms = ["rectangle", "twospheres"]
@@ -13,14 +13,14 @@ conflictexamples = load(
     for m in ms
         for X in Xs
             elements, conflictindices, conflictids = conflictexamples[(m, X)]
-            conflicts = GraphColoring.ConflictFunctor(conflictindices)
-            c = GraphColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
+            conflicts = GraphsColoring.ConflictFunctor(conflictindices)
+            c = GraphsColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
 
-            for s in [GraphColoring.conflictmatrix(c), GraphColoring.conflictgraph(c)]
-                for algorithm in [GraphColoring.DSATUR(), GraphColoring.Greedy()]
+            for s in [GraphsColoring.conflictmatrix(c), GraphsColoring.conflictgraph(c)]
+                for algorithm in [GraphsColoring.DSATUR(), GraphsColoring.Greedy()]
                     println("coloring with $(typeof(algorithm))")
 
-                    oddzones, evenzones = GraphColoring.partition(s)
+                    oddzones, evenzones = GraphsColoring.partition(s)
 
                     oddelements = Int[]
                     evenelements = Int[]
@@ -47,7 +47,7 @@ conflictexamples = load(
                                     for jelement in jzone
                                         combinations += 1
                                         @test jelement ∉
-                                            GraphColoring._neighbors(s, ielement)
+                                            GraphsColoring._neighbors(s, ielement)
                                     end
                                 end
                             end

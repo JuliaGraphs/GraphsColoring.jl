@@ -15,7 +15,7 @@ A conflict representation must implement the following functions:
 3. [`noconflicts`](@ref): Returns a boolean indicating whether there occurs any conflict in the whole representation.
 
 It is possible to have a [`SparseMatrixCSC`](https://docs.julialang.org/en/v1/stdlib/SparseArrays/#man-csc) from [`SparseArrays`](https://github.com/JuliaSparse/SparseArrays.jl) or a [`SimpleGraph`](https://juliagraphs.org/Graphs.jl/stable/core_functions/simplegraphs/#Graphs.SimpleGraphs.SimpleGraph) from [`Graphs.jl`](https://github.com/JuliaGraphs/Graphs.jl) as a conflict representation.
-The graph conflict representation is tied to `GraphColoring` as an extension depending on  [`Graphs.jl`](https://github.com/JuliaGraphs/Graphs.jl).
+The graph conflict representation is tied to `GraphsColoring` as an extension depending on  [`Graphs.jl`](https://github.com/JuliaGraphs/Graphs.jl).
 
 The respective representation needs to support the [`conflicts`](@ref) function that returns
 
@@ -26,12 +26,12 @@ The respective representation needs to support the [`conflicts`](@ref) function 
 ```@example conflicts
 using CompScienceMeshes
 using BEAST
-using GraphColoring
+using GraphsColoring
 
 m = meshsphere(1.0, 0.1)
 X = raviartthomas(m)
 
-conflicts = GraphColoring.conflicts(X)
+conflicts = GraphsColoring.conflicts(X)
 ```
 
 ## Sparse matrix as conflict representation
@@ -39,12 +39,12 @@ conflicts = GraphColoring.conflicts(X)
 ```@example conflictmatrix
 using CompScienceMeshes
 using BEAST
-using GraphColoring
+using GraphsColoring
 
 m = meshsphere(1.0, 0.1)
 X = raviartthomas(m)
 
-conflicts = GraphColoring.conflictmatrix(X)
+conflicts = GraphsColoring.conflictmatrix(X)
 ```
 
 ## Graph as conflict representation
@@ -53,11 +53,11 @@ conflicts = GraphColoring.conflictmatrix(X)
 using CompScienceMeshes
 using BEAST
 using Graphs
-using GraphColoring
+using GraphsColoring
 
 m = meshsphere(1.0, 0.1)
 X = raviartthomas(m)
 
-conflicts = GraphColoring.conflictgraph(X)
+conflicts = GraphsColoring.conflictgraph(X)
 println(typeof(conflicts))
 ```

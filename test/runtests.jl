@@ -25,14 +25,14 @@ end
 
 @testitem "Code quality (Aqua.jl)" begin
     using Aqua
-    using GraphColoring
-    Aqua.test_all(GraphColoring)
+    using GraphsColoring
+    Aqua.test_all(GraphsColoring)
 end
 
 @testitem "Code formatting (JuliaFormatter.jl)" begin
     using JuliaFormatter
-    using GraphColoring
-    @test JuliaFormatter.format(pkgdir(GraphColoring), overwrite=false)
+    using GraphsColoring
+    @test JuliaFormatter.format(pkgdir(GraphsColoring), overwrite=false)
 end
 
 @run_package_tests verbose = true

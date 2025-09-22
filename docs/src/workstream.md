@@ -35,14 +35,14 @@ See [1] for more information on the [`Workstream`](@ref) design pattern.
 using PlotlyJS
 using CompScienceMeshes
 using BEAST
-using GraphColoring
+using GraphsColoring
 
 m = meshsphere(1.0, 0.1)
 X = raviartthomas(m)
 
-conflicts = GraphColoring.conflictmatrix(X)
+conflicts = GraphsColoring.conflictmatrix(X)
 
-colors = GraphColoring.color(conflicts; algorithm=WorkstreamDSATUR)
+colors = GraphsColoring.color(conflicts; algorithm=WorkstreamDSATUR)
 
 for (i, color) in enumerate(colors)
     println("Color $i has $(length(color)) elements")
@@ -83,14 +83,14 @@ Instead of the [`DSATUR`](@ref) algorithm we can also use the [`Greedy`](@ref) a
 using PlotlyJS#hide
 using CompScienceMeshes#hide
 using BEAST#hide
-using GraphColoring#hide
+using GraphsColoring#hide
 
 m = meshsphere(1.0, 0.1)#hide
 X = raviartthomas(m)#hide
 
-conflicts = GraphColoring.conflictmatrix(X)#hide
+conflicts = GraphsColoring.conflictmatrix(X)#hide
 
-colors = GraphColoring.color(conflicts; algorithm=WorkstreamGreedy)
+colors = GraphsColoring.color(conflicts; algorithm=WorkstreamGreedy)
 
 for (i, color) in enumerate(colors)#hide
     println("Color $i has $(length(color)) elements")#hide

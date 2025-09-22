@@ -1,8 +1,8 @@
 ```@meta
-CurrentModule = GraphColoring
+CurrentModule = GraphsColoring
 ```
 
-# GraphColoring
+# GraphsColoring
 
 Graph coloring is a technique used to avoid conflicts between elements in a graph. The goal is to assign colors to the elements such that no two neighboring elements have the same color.
 Currently, the following aspects are implemented (✓) and planned (⌛):
@@ -15,11 +15,11 @@ Currently, the following aspects are implemented (✓) and planned (⌛):
 
 ## Related packages
 
-The [GraphColoring](https://github.com/djukic14/GraphColoring.jl) package is related to the following packages:
+The [GraphsColoring](https://github.com/djukic14/GraphsColoring.jl) package is related to the following packages:
 
 - [`BEAST`](https://github.com/krcools/BEAST.jl)
 - [`Graphs.jl`](https://github.com/JuliaGraphs/Graphs.jl)
 
 ## Documentation
 
-This documentation provides an overview of the [GraphColoring](https://github.com/djukic14/GraphColoring.jl) package, including its features, goals, and related packages. For more information, please see the individual documentation pages for each module and function.
+This documentation provides an overview of the [GraphsColoring](https://github.com/djukic14/GraphsColoring.jl) package, including its features, goals, and related packages. For more information, please see the individual documentation pages for each module and function.

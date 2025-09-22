@@ -1,4 +1,4 @@
-# GraphColoring
+# GraphsColoring
 
 <p align="center">
 <picture>
@@ -7,10 +7,10 @@
 </picture>
 </p>
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://djukic14.github.io/GraphColoring.jl/stable/)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://djukic14.github.io/GraphColoring.jl/dev/)
-[![Build Status](https://github.com/djukic14/GraphColoring.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/djukic14/GraphColoring.jl/actions/workflows/CI.yml?query=branch%3Amain)
-[![Coverage](https://codecov.io/gh/djukic14/GraphColoring.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/djukic14/GraphColoring.jl)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://djukic14.github.io/GraphsColoring.jl/stable/)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://djukic14.github.io/GraphsColoring.jl/dev/)
+[![Build Status](https://github.com/djukic14/GraphsColoring.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/djukic14/GraphsColoring.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Coverage](https://codecov.io/gh/djukic14/GraphsColoring.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/djukic14/GraphsColoring.jl)
 
 ## Introduction
 
@@ -25,5 +25,5 @@ Currently, the following aspects are implemented (✓) and planned (⌛):
 
 ## Documentation
 
-- Documentation for the [latest stable version](https://djukic14.github.io/GraphColoring.jl/stable/).
-- Documentation for the [development version](https://djukic14.github.io/GraphColoring.jl/dev/)
+- Documentation for the [latest stable version](https://djukic14.github.io/GraphsColoring.jl/stable/).
+- Documentation for the [development version](https://djukic14.github.io/GraphsColoring.jl/dev/)

@@ -15,7 +15,7 @@ For a consistent style the [JuliaFormatter.jl](https://github.com/domluna/JuliaF
 
 ```julia
 using JuliaFormatter
-format(pkgdir(GraphColoring; overwrite=true))
+format(pkgdir(GraphsColoring; overwrite=true))
 ```
 
 !!! note
@@ -35,20 +35,20 @@ Write tests for your code changes and verify that no errors occur, e.g., by runn
 
 ```julia
 using Pkg
-Pkg.test("GraphColoring")
+Pkg.test("GraphsColoring")
 ```
 
 For more detailed information on which parts are tested the coverage can be evaluated on your local machine, e.g., by
 
 ```julia
 using Pkg
-Pkg.test("GraphColoring"; coverage=true, julia_args=`--threads 6`)
+Pkg.test("GraphsColoring"; coverage=true, julia_args=`--threads 6`)
 
 # determine coverage
 using Coverage
-src_folder = pkgdir(GraphColoring) * "/src"
+src_folder = pkgdir(GraphsColoring) * "/src"
 coverage   = process_folder(src_folder)
-LCOV.writefile("path-to-folder-you-like" * "GraphColoring.lcov.info", coverage)
+LCOV.writefile("path-to-folder-you-like" * "GraphsColoring.lcov.info", coverage)
 
 clean_folder(src_folder) # delete .cov files
 
@@ -57,4 +57,4 @@ covered_lines, total_lines = get_summary(coverage)
 @info "Current coverage:\n$covered_lines of $total_lines lines ($(round(Int, covered_lines / total_lines * 100)) %)"
 ```
 
-In Visual Studio Code the [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters) plugin can be used to visualize the tested lines of the code by inserting the path of the *GraphColoring.lcov.info* file in the settings.
+In Visual Studio Code the [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters) plugin can be used to visualize the tested lines of the code by inserting the path of the *GraphsColoring.lcov.info* file in the settings.
