@@ -21,15 +21,12 @@ conflicts = GraphsColoring.conflictmatrix(X)
 
 colors = GraphsColoring.color(conflicts; algorithm=Greedy())
 
-for (i, color) in enumerate(colors)
-    println("Color $i has $(length(color)) elements")
-end
-
 facecolors = zeros(size(conflicts, 1))
 
-for (i, color) in enumerate(colors)
-    for element in color
-        facecolors[element] = i
+for color in eachindex(colors)
+    println("Color $color has $(length(colors[color])) elements")
+    for element in colors[color]
+        facecolors[element] = color
     end
 end
 

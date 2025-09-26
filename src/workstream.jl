@@ -122,7 +122,9 @@ algorithm to color the elements within that zone.
 function colorzones(conflicts, zones, algorithm)
     zonecolors = Vector{Vector{Vector{Int}}}(undef, length(zones))
     for i in eachindex(zones)
-        zonecolors[i] = color(conflicts, algorithm, collect(zones[i]))
+        zonecolors[i] = colors(
+            color(conflicts, algorithm, GroupedColorConst, collect(zones[i]))
+        )
     end
     return zonecolors
 end
@@ -220,16 +222,21 @@ See [1] for more information on the workstream design pattern.
 
 [1] B. Turcksin, M. Kronbichler, and W. Bangerth, **WorkStream – A Design Pattern for Multicore-Enabled Finite Element Computations**, 2017
 """
-function color(conflicts, algorithm::Workstream, elements=1:_numelements(conflicts))
+function color(
+    conflicts,
+    algorithm::Workstream,
+    storage=GroupedColorConst,
+    elements=1:_numelements(conflicts),
+)
     !(elements == 1:_numelements(conflicts)) &&
         return error("Workstream coloring only supports coloring all elements.")
 
-    noconflicts(conflicts) && return [collect(elements)]
+    noconflicts(conflicts) && return storage([collect(elements)])
 
     oddzones, evenzones = partition(conflicts)
 
     oddcoloredzones = colorzones(conflicts, oddzones, algorithm.algorithm)
     evencoloredzones = colorzones(conflicts, evenzones, algorithm.algorithm)
 
-    return gather(oddcoloredzones, evencoloredzones)
+    return storage(gather(oddcoloredzones, evencoloredzones))
 end

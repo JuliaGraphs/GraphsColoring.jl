@@ -13,6 +13,7 @@ function conflicts end
 """
 function conflictgraph end
 
+include("storage.jl")
 include("conflicts.jl")
 include("greedy.jl")
 include("dsatur.jl")
@@ -34,11 +35,12 @@ not have any conflicts.
 
   - A `Vector{Vector{Int}}` where each inner `Vector` represents the elements of one color.
 """
-function color(conflicts; algorithm=Workstream(DSATUR()))
-    return color(conflicts, algorithm)
+function color(conflicts; algorithm=Workstream(DSATUR()), storage=GroupedColors())
+    return color(conflicts, algorithm, storage)
 end
 
-export color, WorkstreamDSATUR, WorkstreamGreedy, Workstream, DSATUR, Greedy
+export numcolors,
+    colors, color, WorkstreamDSATUR, WorkstreamGreedy, Workstream, DSATUR, Greedy
 export PassThroughConflictFunctor
 
 if !isdefined(Base, :get_extension)

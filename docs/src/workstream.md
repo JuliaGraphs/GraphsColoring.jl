@@ -44,15 +44,12 @@ conflicts = GraphsColoring.conflictmatrix(X)
 
 colors = GraphsColoring.color(conflicts; algorithm=WorkstreamDSATUR)
 
-for (i, color) in enumerate(colors)
-    println("Color $i has $(length(color)) elements")
-end
-
 facecolors = zeros(size(conflicts, 1))
 
-for (i, color) in enumerate(colors)
-    for element in color
-        facecolors[element] = i
+for color in eachindex(colors)
+    println("Color $color has $(length(colors[color])) elements")
+    for element in colors[color]
+        facecolors[element] = color
     end
 end
 
@@ -92,17 +89,14 @@ conflicts = GraphsColoring.conflictmatrix(X)#hide
 
 colors = GraphsColoring.color(conflicts; algorithm=WorkstreamGreedy)
 
-for (i, color) in enumerate(colors)#hide
-    println("Color $i has $(length(color)) elements")#hide
-end#hide
-
 facecolors = zeros(size(conflicts, 1))#hide
 
-for (i, color) in enumerate(colors)#hide
-    for element in color#hide
-        facecolors[element] = i#hide
+for color in eachindex(colors)#hide
+    println("Color $color has $(length(colors[color])) elements")#hide
+    for element in colors[color]#hide
+        facecolors[element] = color#hide
     end#hide
-end #hide
+end#hide
 
 p = PlotlyJS.plot(#hide
     patch(m, facecolors; showscale=false),#hide

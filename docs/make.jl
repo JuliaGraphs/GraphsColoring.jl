@@ -67,6 +67,7 @@ makedocs(;
             "DSatur" => "dsatur.md",
             "Workstream" => "workstream.md",
         ],
+        "Storing colors" => "storage.md",
         "Contributing" => "contributing.md",
         "API Reference" => "apiref.md",
     ],

@@ -3,6 +3,7 @@ using GraphsColoring
 using Graphs
 
 import GraphsColoring: conflictgraph, conflictmatrix, _neighbors, _numelements, noconflicts
+import GraphsColoring: numcolors, colors
 
 # creates conflict graph as SimpleGraph from Graphs.jl (https://github.com/JuliaGraphs/Graphs.jl)
 # from conflictmatrix
@@ -91,6 +92,43 @@ Checks if there are no conflicts in the given graph.
 """
 function noconflicts(g::AbstractGraph)
     return iszero(ne(g))
+end
+
+function numcolors(c::Graphs.Coloring)
+    return c.num_colors
+end
+
+function colors(c::Graphs.Coloring)
+    return c.colors
+end
+
+function (::GraphsColoring.GraphsColors)(maxcolor, colors, elements)
+    return Graphs.Coloring(maxcolor, colors)
+end
+function (::GraphsColoring.GraphsColors)(colors)
+    numcolors, colors = _groupedcolorstographcoloring(colors)
+    return Graphs.Coloring(numcolors, colors)
+end
+
+function _groupedcolorstographcoloring(colors)
+    newcolors = zeros(eltype(eltype(colors)), sum(length, colors))
+    for (i, color) in enumerate(colors)
+        newcolors[color] .= i
+    end
+    return length(colors), newcolors
+end
+
+function Base.convert(::Type{<:Graphs.Coloring}, colors::GraphsColoring.GroupedColoring)
+    numcolors, colors = _groupedcolorstographcoloring(GraphsColoring.colors(colors))
+    return Graphs.Coloring(numcolors, colors)
+end
+
+function Base.eachindex(c::Graphs.Coloring)
+    return Base.OneTo(numcolors(c))
+end
+
+function Base.getindex(c::Graphs.Coloring, color)
+    return findall(isequal(color), colors(c))
 end
 
 end # module GraphsColoringGraphs
