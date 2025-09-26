@@ -17,21 +17,42 @@ conflictexamples = load(
             c = GraphsColoring.PassThroughConflictFunctor(elements, conflicts, conflictids)
 
             for s in [GraphsColoring.conflictmatrix(c), GraphsColoring.conflictgraph(c)]
-                @test GraphsColoring.color(s) == GraphsColoring.color(s, WorkstreamDSATUR)
-
                 for algorithm in [WorkstreamDSATUR, WorkstreamGreedy]
-                    println("coloring with $(typeof(algorithm))")
+                    c1 = GraphsColoring.color(s, algorithm, GraphsColoring.GraphsColors())
+                    c2 = GraphsColoring.color(s, algorithm, GraphsColoring.GroupedColors())
 
-                    colors = GraphsColoring.color(s, algorithm)
+                    c_converted = convert(typeof(c1), c2)
+                    @test GraphsColoring.numcolors(c1) ==
+                        GraphsColoring.numcolors(c_converted)
+                    @test GraphsColoring.colors(c1) == GraphsColoring.colors(c_converted)
+                end
 
-                    @test sort(vcat(colors...)) == 1:GraphsColoring._numelements(s)
-                    for color in eachindex(colors)
-                        elements = colors[color]
-                        for testelement in elements
-                            for trialelement in elements
-                                testelement == trialelement && continue
-                                @test testelement ∉
-                                    GraphsColoring._neighbors(s, trialelement)
+                for storage in
+                    [GraphsColoring.GroupedColors(), GraphsColoring.GraphsColors()]
+                    @test GraphsColoring.color(s; storage=storage).colors ==
+                        GraphsColoring.color(s, WorkstreamDSATUR, storage).colors
+
+                    for algorithm in [WorkstreamDSATUR, WorkstreamGreedy]
+                        println("coloring with $(typeof(algorithm))")
+
+                        colors = GraphsColoring.color(s, algorithm, storage)
+
+                        if colors isa GraphsColoring.GroupedColoring
+                            @test sort(vcat(colors.colors...)) ==
+                                1:GraphsColoring._numelements(s)
+
+                        elseif colors isa Graphs.Coloring
+                            @test length(colors.colors) == GraphsColoring._numelements(s)
+                        end
+
+                        for color in eachindex(colors)
+                            elements = colors[color]
+                            for testelement in elements
+                                for trialelement in elements
+                                    testelement == trialelement && continue
+                                    @test testelement ∉
+                                        GraphsColoring._neighbors(s, trialelement)
+                                end
                             end
                         end
                     end

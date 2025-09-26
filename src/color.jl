@@ -17,7 +17,9 @@ The colors are sorted such that the number of their members decrease.
 
 This function implements a generic coloring workflow that can be used with different algorithms, such as DSATUR and Greedy.
 """
-function color(conflicts, algorithm, elements=1:_numelements(conflicts))
+function color(
+    conflicts, algorithm, storage=GroupedColorConst, elements=1:_numelements(conflicts)
+)
     elementtoelementid = Dict{Int,Int}(zip(elements, eachindex(elements)))
 
     maxcolor = 1
@@ -75,7 +77,5 @@ function color(conflicts, algorithm, elements=1:_numelements(conflicts))
         end
     end
 
-    colors = Vector{Int}[elements[findall(isequal(color), colors)] for color in 1:maxcolor]
-    sort!(colors; by=length, rev=true)
-    return colors
+    return storage(maxcolor, colors, elements)
 end
