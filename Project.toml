@@ -15,7 +15,7 @@ GraphsColoringGraphs = ["Graphs"]
 
 [compat]
 Aqua = "0.8"
-DataStructures = "^0.18.1, 0.19"
+DataStructures = "^0.18.1, 0.19, 0.19"
 Graphs = "1"
 JLD2 = "0.6"
 JuliaFormatter = "2.1"
